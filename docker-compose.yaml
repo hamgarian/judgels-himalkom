@@ -1,10 +1,23 @@
 version: "3.8"
 services:
+  mysql:
+    image: mysql:8
+    environment:
+      - MYSQL_ROOT_PASSWORD=${DB_ROOT_PASSWORD}
+      - MYSQL_DATABASE=${DB_NAME}
+      - MYSQL_USER=${DB_USER}
+      - MYSQL_PASSWORD=${DB_PASSWORD}
+    volumes:
+      - mysql-data:/var/lib/mysql
+    restart: always
+
   judgels-server:
     image: ghcr.io/hamgarian/judgels-himalkom/server:latest
     pull_policy: always
+    depends_on:
+      - mysql
     environment:
-      - DB_HOST=${DB_HOST}
+      - DB_HOST=mysql        # <-- just use the service name!
       - DB_PORT=${DB_PORT:-3306}
       - DB_NAME=${DB_NAME}
       - SPRING_DATASOURCE_USERNAME=${DB_USER}
@@ -18,12 +31,14 @@ services:
     volumes:
       - judgels-data:/var/judgels
     restart: always
+
   judgels-client:
     image: ghcr.io/hamgarian/judgels-himalkom/client:latest
     pull_policy: always
     environment:
       - API_URL=${URL_API}
     restart: always
+
   judgels-grader:
     image: ghcr.io/hamgarian/judgels-himalkom/grader:latest
     pull_policy: always
@@ -37,6 +52,8 @@ services:
       - grader-data:/var/judgels/grader
       - judgels-data:/var/judgels/server:ro
     restart: always
+
 volumes:
   judgels-data:
   grader-data:
+  mysql-data:
