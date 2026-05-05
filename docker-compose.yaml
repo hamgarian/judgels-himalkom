@@ -2,6 +2,7 @@ version: "3.8"
 services:
   judgels-server:
     image: ghcr.io/hamgarian/judgels-himalkom/server:latest
+    pull_policy: always
     environment:
       - SPRING_DATASOURCE_URL=jdbc:mysql://${DB_HOST}:3306/${DB_NAME}
       - SPRING_DATASOURCE_USERNAME=${DB_USER}
@@ -17,11 +18,13 @@ services:
     restart: always
   judgels-client:
     image: ghcr.io/hamgarian/judgels-himalkom/client:latest
+    pull_policy: always
     environment:
       - API_URL=${URL_API}
     restart: always
   judgels-grader:
     image: ghcr.io/hamgarian/judgels-himalkom/grader:latest
+    pull_policy: always
     privileged: true
     environment:
       - SPRING_RABBITMQ_HOST=${RMQ_HOST}
