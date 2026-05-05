@@ -2,7 +2,9 @@ version: "3.8"
 
 services:
   judgels-server:
-    image: ghcr.io/hamgarian/judgels-himalkom/server:latest
+    build:
+      context: ./judgels-backends
+      dockerfile: Dockerfile
     environment:
       - SPRING_DATASOURCE_URL=jdbc:mysql://${DB_HOST}:3306/${DB_NAME}
       - SPRING_DATASOURCE_USERNAME=${DB_USER}
@@ -18,13 +20,17 @@ services:
     restart: always
 
   judgels-client:
-    image: ghcr.io/hamgarian/judgels-himalkom/client:latest
+    build:
+      context: ./judgels-client
+      dockerfile: Dockerfile
     environment:
       - API_URL=${URL_API}
     restart: always
 
   judgels-grader:
-    image: ghcr.io/hamgarian/judgels-himalkom/grader:latest
+    build:
+      context: ./judgels-grader
+      dockerfile: Dockerfile
     privileged: true
     environment:
       - SPRING_RABBITMQ_HOST=${RMQ_HOST}
