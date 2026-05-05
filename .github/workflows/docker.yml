@@ -28,7 +28,7 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: ./judgels-backends
-          dockerfile: ./judgels-backends/judgels-server-app/Dockerfile
+          file: ./judgels-backends/judgels-server-app/Dockerfile
           push: true
           tags: ghcr.io/hamgarian/judgels-himalkom/server:latest
 
@@ -36,7 +36,7 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: ./judgels-client
-          dockerfile: ./judgels-client/Dockerfile
+          file: ./judgels-client/Dockerfile
           push: true
           tags: ghcr.io/hamgarian/judgels-himalkom/client:latest
 
@@ -44,6 +44,6 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: ./judgels-backends
-          dockerfile: ./judgels-backends/judgels-grader-app/Dockerfile
+          file: ./judgels-backends/judgels-grader-app/Dockerfile
           push: true
           tags: ghcr.io/hamgarian/judgels-himalkom/grader:latest
