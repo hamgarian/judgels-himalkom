@@ -78,8 +78,8 @@ services:
       - DB_PORT=${DB_PORT:-3306}
       - DB_NAME=${DB_NAME}
       - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/${DB_NAME}?useSSL=false&connectionTimeZone=UTC&forceConnectionTimeZoneToSession=true&allowPublicKeyRetrieval=true
-      - SPRING_DATASOURCE_USERNAME=${DB_USER}
-      - SPRING_DATASOURCE_PASSWORD=${DB_PASSWORD}
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=${DB_ROOT_PASSWORD}
     command: ["db", "migrate"]
     restart: "no"
 
