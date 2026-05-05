@@ -10,19 +10,43 @@ services:
     volumes:
       - mysql-data:/var/lib/mysql
     restart: always
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p${DB_ROOT_PASSWORD}"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    environment:
+      - RABBITMQ_DEFAULT_USER=${RMQ_USER}
+      - RABBITMQ_DEFAULT_PASS=${RMQ_PASSWORD}
+    volumes:
+      - rabbitmq-data:/var/lib/rabbitmq
+    restart: always
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
 
   judgels-server:
     image: ghcr.io/hamgarian/judgels-himalkom/server:latest
     pull_policy: always
     depends_on:
-      - mysql
+      mysql:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
     environment:
-      - DB_HOST=mysql        # <-- just use the service name!
+      - DB_HOST=mysql
       - DB_PORT=${DB_PORT:-3306}
       - DB_NAME=${DB_NAME}
       - SPRING_DATASOURCE_USERNAME=${DB_USER}
       - SPRING_DATASOURCE_PASSWORD=${DB_PASSWORD}
-      - SPRING_RABBITMQ_HOST=${RMQ_HOST}
+      - SPRING_RABBITMQ_HOST=rabbitmq
       - SPRING_RABBITMQ_USERNAME=${RMQ_USER}
       - SPRING_RABBITMQ_PASSWORD=${RMQ_PASSWORD}
       - JUDGELS_URLS_CLIENT=${URL_CLIENT}
@@ -43,8 +67,11 @@ services:
     image: ghcr.io/hamgarian/judgels-himalkom/grader:latest
     pull_policy: always
     privileged: true
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
     environment:
-      - SPRING_RABBITMQ_HOST=${RMQ_HOST}
+      - SPRING_RABBITMQ_HOST=rabbitmq
       - SPRING_RABBITMQ_USERNAME=${RMQ_USER}
       - SPRING_RABBITMQ_PASSWORD=${RMQ_PASSWORD}
       - JUDGELS_GRADER_API_URL=${URL_API}
@@ -57,3 +84,4 @@ volumes:
   judgels-data:
   grader-data:
   mysql-data:
+  rabbitmq-data:
