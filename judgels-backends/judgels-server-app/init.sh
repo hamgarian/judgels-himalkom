@@ -8,16 +8,25 @@ yaml_escape() {
   printf "%s" "$1" | sed "s/'/''/g"
 }
 
+strip_url_host() {
+  value="${1#*://}"
+  value="${value#*@}"
+  value="${value%%/*}"
+  value="${value%%:*}"
+  printf "%s" "$value"
+}
+
 write_config() {
   mkdir -p "$(dirname "$CONFIG_FILE")" /var/judgels/data /var/judgels/log
 
-  DB_HOST="${DB_HOST:-localhost}"
+  DB_HOST="$(strip_url_host "${DB_HOST:-localhost}")"
+  DB_PORT="${DB_PORT:-3306}"
   DB_NAME="${DB_NAME:-judgels}"
-  DB_URL="${SPRING_DATASOURCE_URL:-jdbc:mysql://${DB_HOST}:3306/${DB_NAME}?useSSL=false&connectionTimeZone=UTC&forceConnectionTimeZoneToSession=true}"
+  DB_URL="${SPRING_DATASOURCE_URL:-jdbc:mysql://${DB_HOST}:${DB_PORT}/${DB_NAME}?useSSL=false&connectionTimeZone=UTC&forceConnectionTimeZoneToSession=true}"
   DB_USER="${SPRING_DATASOURCE_USERNAME:-${DB_USER:-judgels}}"
   DB_PASSWORD="${SPRING_DATASOURCE_PASSWORD:-${DB_PASSWORD:-judgels}}"
 
-  RMQ_HOST="${SPRING_RABBITMQ_HOST:-${RMQ_HOST:-}}"
+  RMQ_HOST="$(strip_url_host "${SPRING_RABBITMQ_HOST:-${RMQ_HOST:-}}")"
   RMQ_USER="${SPRING_RABBITMQ_USERNAME:-${RMQ_USER:-guest}}"
   RMQ_PASSWORD="${SPRING_RABBITMQ_PASSWORD:-${RMQ_PASSWORD:-guest}}"
 

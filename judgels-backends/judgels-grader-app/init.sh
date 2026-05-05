@@ -8,10 +8,18 @@ yaml_escape() {
   printf "%s" "$1" | sed "s/'/''/g"
 }
 
+strip_url_host() {
+  value="${1#*://}"
+  value="${value#*@}"
+  value="${value%%/*}"
+  value="${value%%:*}"
+  printf "%s" "$value"
+}
+
 write_config() {
   mkdir -p "$(dirname "$CONFIG_FILE")" /var/judgels/grader/data /var/judgels/grader/cache /var/judgels/grader/log
 
-  RMQ_HOST="${SPRING_RABBITMQ_HOST:-${RMQ_HOST:-localhost}}"
+  RMQ_HOST="$(strip_url_host "${SPRING_RABBITMQ_HOST:-${RMQ_HOST:-localhost}}")"
   RMQ_USER="${SPRING_RABBITMQ_USERNAME:-${RMQ_USER:-guest}}"
   RMQ_PASSWORD="${SPRING_RABBITMQ_PASSWORD:-${RMQ_PASSWORD:-guest}}"
   NUM_WORKER_THREADS="${GABRIEL_GRADING_NUM_WORKER_THREADS:-2}"
