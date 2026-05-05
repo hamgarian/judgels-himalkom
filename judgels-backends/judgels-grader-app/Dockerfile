@@ -23,13 +23,11 @@ ENV XDG_CACHE_HOME /tmp
 ENV JAVA_HOME /usr/lib/jvm/java-17-openjdk
 ENV PATH $JAVA_HOME/bin:$PATH
 RUN apt-get update \
-    && apt-get -y --no-install-recommends install software-properties-common gpg-agent \
-    && add-apt-repository -y ppa:ubuntu-toolchain-r/test \
     && apt-get -y --no-install-recommends install \
+       ca-certificates \
        curl \
        openssh-client \
        rsync \
-    && apt-get -y --no-install-recommends install \
        fp-compiler \
        g++-13 \
        golang \
@@ -39,8 +37,8 @@ RUN apt-get update \
        pypy3 \
        python3 \
     && ln -s /usr/lib/jvm/java-17-openjdk-$(dpkg --print-architecture) $JAVA_HOME \
-    && ln -s /usr/bin/gcc-13 /usr/bin/gcc \
-    && ln -s /usr/bin/g++-13 /usr/bin/g++ \
+    && ln -sf /usr/bin/gcc-13 /usr/bin/gcc \
+    && ln -sf /usr/bin/g++-13 /usr/bin/g++ \
     && curl -sSf https://sh.rustup.rs/ | bash -s -- -y -q --default-toolchain=1.57.0 \
     && test -x "$JAVA_HOME/bin/java" \
     && rm -rf /var/lib/apt/lists/*
