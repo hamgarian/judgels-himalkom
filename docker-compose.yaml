@@ -30,6 +30,7 @@ services:
       - JUDGELS_GRADER_API_URL=${URL_API}
     volumes:
       - grader-data:/var/judgels/grader
+      - judgels-data:/var/judgels/server:ro
     restart: always
 volumes:
   judgels-data:

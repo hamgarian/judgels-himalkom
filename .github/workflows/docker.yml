@@ -49,6 +49,9 @@ jobs:
             --load \
             -t judgels-grader-check \
             ./judgels-backends
+          docker run --rm --entrypoint test judgels-grader-check -x ./init.sh
+          docker run --rm --entrypoint test judgels-grader-check -x ./bin/judgels-grader-app
+          docker run --rm --entrypoint test judgels-grader-check -x /usr/lib/jvm/java-17-openjdk/bin/java
 
   build-client:
     needs: check-client
