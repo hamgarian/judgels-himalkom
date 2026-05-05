@@ -12,11 +12,11 @@ services:
       - mysql-data:/var/lib/mysql
     restart: always
     healthcheck:
-      test: ["CMD-SHELL", "mysqladmin ping -h 127.0.0.1 -u root -p\"${DB_ROOT_PASSWORD}\" || exit 1"]
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p${DB_ROOT_PASSWORD}"]
       interval: 10s
       timeout: 5s
-      retries: 20
-      start_period: 60s
+      retries: 10
+      start_period: 30s
 
   rabbitmq:
     image: rabbitmq:3-management
