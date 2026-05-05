@@ -22,7 +22,7 @@ write_config() {
   DB_HOST="$(strip_url_host "${DB_HOST:-localhost}")"
   DB_PORT="${DB_PORT:-3306}"
   DB_NAME="${DB_NAME:-judgels}"
-  DB_URL="${SPRING_DATASOURCE_URL:-jdbc:mysql://${DB_HOST}:${DB_PORT}/${DB_NAME}?useSSL=false&connectionTimeZone=UTC&forceConnectionTimeZoneToSession=true}"
+  DB_URL="${SPRING_DATASOURCE_URL:-jdbc:mysql://${DB_HOST}:${DB_PORT}/${DB_NAME}?useSSL=false&connectionTimeZone=UTC&forceConnectionTimeZoneToSession=true&allowPublicKeyRetrieval=true}"
   DB_USER="${SPRING_DATASOURCE_USERNAME:-${DB_USER:-judgels}}"
   DB_PASSWORD="${SPRING_DATASOURCE_PASSWORD:-${DB_PASSWORD:-judgels}}"
 

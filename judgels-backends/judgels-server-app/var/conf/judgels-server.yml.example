@@ -16,7 +16,7 @@ server:
 
 database:
   driverClass: com.mysql.cj.jdbc.Driver
-  url: jdbc:mysql://localhost/judgels?useSSL=false&connectionTimeZone=UTC&forceConnectionTimeZoneToSession=true
+  url: jdbc:mysql://localhost/judgels?useSSL=false&connectionTimeZone=UTC&forceConnectionTimeZoneToSession=true&allowPublicKeyRetrieval=true
   user: judgels
   password: judgels
   properties:
