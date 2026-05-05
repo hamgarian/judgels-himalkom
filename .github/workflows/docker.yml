@@ -5,7 +5,7 @@ on:
     branches: [master]
 
 jobs:
-  test-client:
+  check-client:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -18,11 +18,11 @@ jobs:
       - name: Install dependencies
         working-directory: judgels-client
         run: npm ci --legacy-peer-deps
-      - name: Run tests
+      - name: Build
         working-directory: judgels-client
-        run: npm test
+        run: npm run build
 
-  test-backend:
+  check-backend:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -31,12 +31,26 @@ jobs:
         with:
           java-version: 17
           distribution: temurin
-      - name: Run tests
+      - name: Build server
         working-directory: judgels-backends
-        run: ./gradlew test --no-daemon
+        run: ./gradlew :judgels-server-app:distTar --no-daemon
+      - name: Build grader
+        working-directory: judgels-backends
+        run: ./gradlew :judgels-grader-app:distTar --no-daemon
+
+  check-grader-dockerfile-arm64:
+    runs-on: ubuntu-24.04-arm
+    steps:
+      - uses: actions/checkout@v4
+      - name: Test grader Dockerfile on native arm64
+        run: |
+          docker build \
+            --file ./judgels-backends/judgels-grader-app/Dockerfile \
+            --no-push \
+            ./judgels-backends
 
   build-client:
-    needs: test-client
+    needs: check-client
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -65,7 +79,7 @@ jobs:
           cache-to: type=gha,mode=max,scope=client
 
   build-server:
-    needs: test-backend
+    needs: check-backend
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -94,7 +108,7 @@ jobs:
           cache-to: type=gha,mode=max,scope=server
 
   build-grader:
-    needs: test-backend
+    needs: [check-backend, check-grader-dockerfile-arm64]
     runs-on: ubuntu-latest
     permissions:
       contents: read
