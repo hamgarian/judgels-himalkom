@@ -46,7 +46,8 @@ jobs:
         run: |
           docker build \
             --file ./judgels-backends/judgels-grader-app/Dockerfile \
-            --no-push \
+            --load \
+            -t judgels-grader-check \
             ./judgels-backends
 
   build-client:
