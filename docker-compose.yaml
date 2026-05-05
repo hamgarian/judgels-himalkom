@@ -55,7 +55,6 @@ services:
       - JUDGELS_URLS_API=${URL_API}
       - JUDGELS_URLS_ADMIN=${URL_ADMIN}
     volumes:
-      - ./judgels-backends/judgels-server-app/init.sh:/judgels/server/init.sh:ro
       - judgels-data:/var/judgels
     restart: always
 
@@ -79,7 +78,6 @@ services:
       - SPRING_RABBITMQ_PASSWORD=${RMQ_PASSWORD}
       - JUDGELS_GRADER_API_URL=${URL_API}
     volumes:
-      - ./judgels-backends/judgels-grader-app/init.sh:/judgels/grader/init.sh:ro
       - grader-data:/var/judgels/grader
       - judgels-data:/var/judgels/server:ro
     restart: always
