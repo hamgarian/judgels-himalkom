@@ -143,9 +143,7 @@ jerahmeel:
 EOF
 }
 
-if [ ! -f "$CONFIG_FILE" ]; then
-  write_config
-fi
+write_config
 
 set -x
 exec ./bin/judgels-server-app "$@" "$CONFIG_FILE"

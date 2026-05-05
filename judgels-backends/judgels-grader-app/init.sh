@@ -67,9 +67,7 @@ gabriel:
 EOF
 }
 
-if [ ! -f "$CONFIG_FILE" ]; then
-  write_config
-fi
+write_config
 
 set -x
 exec ./bin/judgels-grader-app "$@" "$CONFIG_FILE"
