@@ -5,7 +5,7 @@ services:
     command: --mysql-native-password=ON
     environment:
       - MYSQL_ROOT_PASSWORD=${DB_ROOT_PASSWORD}
-      - MYSQL_DATABASE=${DB_NAME}
+      - MYSQL_DATABASE=judgels
       - MYSQL_USER=${DB_USER}
       - MYSQL_PASSWORD=${DB_PASSWORD}
     volumes:
@@ -47,8 +47,8 @@ services:
     environment:
       - DB_HOST=mysql
       - DB_PORT=${DB_PORT:-3306}
-      - DB_NAME=${DB_NAME}
-      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/${DB_NAME}?useSSL=false&connectionTimeZone=UTC&forceConnectionTimeZoneToSession=true&allowPublicKeyRetrieval=true
+      - DB_NAME=judgels
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/judgels?useSSL=false&connectionTimeZone=UTC&forceConnectionTimeZoneToSession=true&allowPublicKeyRetrieval=true
       - SPRING_DATASOURCE_USERNAME=${DB_USER}
       - SPRING_DATASOURCE_PASSWORD=${DB_PASSWORD}
       - SPRING_RABBITMQ_HOST=rabbitmq
@@ -77,8 +77,8 @@ services:
     environment:
       - DB_HOST=mysql
       - DB_PORT=${DB_PORT:-3306}
-      - DB_NAME=${DB_NAME}
-      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/${DB_NAME}?useSSL=false&connectionTimeZone=UTC&forceConnectionTimeZoneToSession=true&allowPublicKeyRetrieval=true
+      - DB_NAME=judgels
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/judgels?useSSL=false&connectionTimeZone=UTC&forceConnectionTimeZoneToSession=true&allowPublicKeyRetrieval=true
       - SPRING_DATASOURCE_USERNAME=root
       - SPRING_DATASOURCE_PASSWORD=${DB_ROOT_PASSWORD}
     command: ["db", "migrate"]
