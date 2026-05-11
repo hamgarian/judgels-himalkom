@@ -1,0 +1,24 @@
+2026.05.11 13:31:20 WARN  Using H2 2.4.240 which is newer than the version Flyway has been verified with. The latest verified version of H2 is 2.3.232.
+2026.05.11 13:31:24 WARN  no build target for: D:\judgels-himalkom\judgels-backends\judgels-server-app\src\main\java\judgels\sandalphon\problem\base\ProblemStore.java
+2026.05.11 13:31:24 WARN  no build target for: D:\judgels-himalkom\judgels-backends\judgels-server-app\src\main\java\judgels\uriel\contest\problem\ContestProblemResource.java
+2026.05.11 13:31:24 WARN  no build target for: D:\judgels-himalkom\judgels-backends\judgels-server-app\src\main\java\judgels\sandalphon\hibernate\ProblemHibernateDao.java
+2026.05.11 13:31:24 WARN  no build target for: D:\judgels-himalkom\judgels-backends\judgels-server-app\src\main\java\judgels\sandalphon\SandalphonClient.java
+2026.05.11 13:32:37 WARN  no build target for: D:\judgels-himalkom\judgels-backends\judgels-server-app\src\main\java\judgels\jerahmeel\problem\ProblemResource.java
+2026.05.11 13:32:37 WARN  no build target for: D:\judgels-himalkom\judgels-backends\judgels-server-app\src\main\java\judgels\sandalphon\problem\base\ProblemResource.java
+2026.05.11 13:32:42 WARN  no build target for: D:\judgels-himalkom\judgels-backends\judgels-server-app\src\main\java\judgels\michael\problem\ProblemResource.java
+2026.05.11 13:33:45 INFO  no build target found for D:\judgels-himalkom\judgels-backends\judgels-server-app\src\main\java\judgels\uriel\contest\problem\ContestProblemResource.java. Using fallback presentation compiler.
+2026.05.11 13:33:56 INFO  no build target found for D:\judgels-himalkom\judgels-backends\judgels-server-app\src\main\java\judgels\sandalphon\SandalphonClient.java. Using fallback presentation compiler.
+2026.05.11 13:34:06 INFO  no build target found for D:\judgels-himalkom\judgels-backends\judgels-server-app\src\main\java\judgels\sandalphon\problem\base\ProblemStore.java. Using fallback presentation compiler.
+2026.05.11 13:34:13 INFO  no build target found for D:\judgels-himalkom\judgels-backends\judgels-server-app\src\main\java\judgels\sandalphon\hibernate\ProblemHibernateDao.java. Using fallback presentation compiler.
+2026.05.11 13:35:37 INFO  no build target found for D:\judgels-himalkom\judgels-backends\judgels-server-app\src\main\java\judgels\jerahmeel\problem\ProblemResource.java. Using fallback presentation compiler.
+2026.05.11 13:35:37 INFO  no build target found for D:\judgels-himalkom\judgels-backends\judgels-server-app\src\main\java\judgels\sandalphon\problem\base\ProblemResource.java. Using fallback presentation compiler.
+2026.05.11 13:35:42 INFO  no build target found for D:\judgels-himalkom\judgels-backends\judgels-server-app\src\main\java\judgels\michael\problem\ProblemResource.java. Using fallback presentation compiler.
+2026.05.11 13:37:10 WARN  no build target for: D:\judgels-himalkom\judgels-backends\judgels-server-app\src\main\java\judgels\jerahmeel\problem\ProblemResource.java
+2026.05.11 13:37:10 INFO  no build target found for D:\judgels-himalkom\judgels-backends\judgels-server-app\src\main\java\judgels\jerahmeel\problem\ProblemResource.java. Using fallback presentation compiler.
+2026.05.11 13:37:10 INFO  no build target found for D:\judgels-himalkom\judgels-backends\judgels-server-app\src\main\java\judgels\jerahmeel\problem\ProblemResource.java. Using fallback presentation compiler.
+2026.05.11 13:37:10 WARN  no build target for: D:\judgels-himalkom\judgels-backends\judgels-server-app\src\main\java\judgels\jerahmeel\problem\ProblemResource.java
+2026.05.11 13:37:10 INFO  no build target found for D:\judgels-himalkom\judgels-backends\judgels-server-app\src\main\java\judgels\jerahmeel\problem\ProblemResource.java. Using fallback presentation compiler.
+2026.05.11 13:44:47 WARN  no build target for: D:\judgels-himalkom\judgels-backends\judgels-grader-engines\src\main\java\judgels\gabriel\sandboxes\isolate\IsolateSandbox.java
+May 11, 2026 1:45:13 PM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
+INFO: Unsupported notification method: $/setTrace
+2026.05.11 13:47:47 INFO  no build target found for D:\judgels-himalkom\judgels-backends\judgels-grader-engines\src\main\java\judgels\gabriel\sandboxes\isolate\IsolateSandbox.java. Using fallback presentation compiler.

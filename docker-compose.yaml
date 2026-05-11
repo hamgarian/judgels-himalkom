@@ -88,6 +88,7 @@ services:
     image: ghcr.io/hamgarian/judgels-himalkom/grader:latest
     pull_policy: always
     privileged: true
+    cgroup: host
     depends_on:
       rabbitmq:
         condition: service_healthy
@@ -99,6 +100,7 @@ services:
     volumes:
       - grader-data:/var/judgels/grader
       - judgels-data:/var/judgels/server:ro
+      - /sys/fs/cgroup:/sys/fs/cgroup:rw
     restart: always
 
 volumes:
