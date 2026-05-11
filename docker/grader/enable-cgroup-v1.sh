@@ -12,7 +12,9 @@ if ! command -v update-grub >/dev/null 2>&1; then
 fi
 
 cat >/etc/default/grub.d/70-judgels-cgroup-v1.cfg <<'EOF'
-GRUB_CMDLINE_LINUX_DEFAULT="${GRUB_CMDLINE_LINUX_DEFAULT} cgroup_enable=memory swapaccount=1 systemd.unified_cgroup_hierarchy=false systemd.legacy_systemd_cgroup_controller=false"
+JUDGELS_CGROUP_V1_ARGS="cgroup_enable=memory swapaccount=1 systemd.unified_cgroup_hierarchy=0 systemd.legacy_systemd_cgroup_controller=0"
+GRUB_CMDLINE_LINUX="${GRUB_CMDLINE_LINUX} ${JUDGELS_CGROUP_V1_ARGS}"
+GRUB_CMDLINE_LINUX_DEFAULT="${GRUB_CMDLINE_LINUX_DEFAULT} ${JUDGELS_CGROUP_V1_ARGS}"
 EOF
 
 update-grub
@@ -22,6 +24,7 @@ cat <<'EOF'
 cgroup v1 boot flags have been installed.
 Reboot the host, then verify:
 
+  stat -fc %T /sys/fs/cgroup
   test -d /sys/fs/cgroup/memory && echo "cgroup v1 memory controller is available"
 
 After that, recreate the grader container:
